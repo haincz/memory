@@ -40,7 +40,7 @@ TileConstructor.prototype.drawTile = function() {
 TileConstructor.prototype.addTileData = function() {
 
 	for (var i = 0; i < this.tileData(); i++) {
-		$('.tile').append('<p>'this.tileData()[i]'<p>');
+		$('.tile').append('<p>' + this.tileData()[i] + '<p>');
 	}
 
 }
