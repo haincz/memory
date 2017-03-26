@@ -38,9 +38,9 @@ TileConstructor.prototype.drawTile = function() {
 
 
 TileConstructor.prototype.addTileData = function() {
-
-	for (var i = 0; i < this.tileData(); i++) {
-		$('.tile').append('<p>' + this.tileData()[i] + '<p>');
+    var arr = this.tileData();
+	for (var i = 0; i < arr.length; i++) {
+		$('.tile').eq(i).append('<p>' + arr[i] + '<p>');
 	}
 
 }
