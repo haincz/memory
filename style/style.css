@@ -18,6 +18,7 @@ body {
 	border: 1px solid black;
 	display: inline-block;
 	margin: 5px;
+	cursor: pointer;
 }
 
 .row-starter {
@@ -30,4 +31,17 @@ body {
 .startgamebutton button {
 	margin: 20px auto;
     display: block;
+}
+
+.tile p {
+
+	margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 22px;
+    visibility: hidden;
+    cursor: pointer;
 }

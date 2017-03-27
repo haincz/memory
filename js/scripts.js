@@ -1,18 +1,8 @@
+
 function TileConstructor () {
 	this.tile = '<div class="tile"></div>';
-	var tileDataArray = [1,2,3,4,5,6,7,8];
-	this.tileData = function () {
-
-	 	for (var i = tileDataArray - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = tileDataArray[i];
-        tileDataArray[i] = tileDataArray[j];
-        tileDataArray[j] = temp;
-   		 }
-
-    return tileDataArray;	
-
-	}
+	//tu docelowo moze powstać zmienna, determinująca długość tablicy poniżej, wartość zmiennej podawana jest przez usera przed startem
+	this.tileData = [1,2,3,4,5,6,7,8,8,7,6,5,4,3,2,1];
 
 }
 
@@ -23,24 +13,25 @@ TileConstructor.prototype.drawTile = function() {
 	}
 };
 
-// TileConstructor.prototype.tileDataShufle = function() {
+TileConstructor.prototype.tileDataShufle = function() {
 
 
-// 	for (var i = this.tileData.length - 1; i > 0; i--) {
-//         var j = Math.floor(Math.random() * (i + 1));
-//         var temp = this.tileData[i];
-//         this.tileData[i] = this.tileData[j];
-//         this.tileData[j] = temp;
-//     }
+	for (var i = this.tileData.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = this.tileData[i];
+        this.tileData[i] = this.tileData[j];
+        this.tileData[j] = temp;
+    }
 
-//     return this.tileData;	
-// }
+    return this.tileData;	
+}
 
 
 TileConstructor.prototype.addTileData = function() {
-    var arr = this.tileData();
+    var arr = tile.tileDataShufle();
+
 	for (var i = 0; i < arr.length; i++) {
-		$('.tile').eq(i).append('<p>' + arr[i] + '<p>');
+		$('.tile').eq(i).append('<p>' + arr[i] + '</p>');
 	}
 
 }
@@ -57,4 +48,9 @@ $(document).ready(function() {
 		//startGame();
 	});
 
+	$('.tile', this).on('click', function(){
+		
+		$("p").css("visibility", "visible");
+
+	});
 });
