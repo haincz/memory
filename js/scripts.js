@@ -1,3 +1,6 @@
+var counter = 0,
+	choicesResult = [];
+
 
 function TileConstructor () {
 	this.tile = '<div class="tile"></div>';
@@ -48,9 +51,33 @@ $(document).ready(function() {
 		//startGame();
 	});
 
-	$('.tile', this).on('click', function(){
-		
-		$("p").css("visibility", "visible");
 
+	//Granie
+	$(document).on('click', '.tile', function() {
+
+		var pValue = $("p", this).text();
+		
+		counter += 1;
+		
+		$("p", this).css("visibility", "visible");
+		choicesResult.push(pValue);
+
+		if (counter == 2) {
+			checkChoicesResult();
+		}
+		
 	});
+
+	function checkChoicesResult() {
+		
+
+		if (choicesResult[0] == choicesResult[1]) {
+			console.log("piknie");
+		}
+
+		else {
+			console.log("dupa");
+		}
+	}
+
 });
