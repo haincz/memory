@@ -1,7 +1,3 @@
-var counter = 0,
-	choicesResult = [];
-
-
 function TileConstructor () {
 	this.tile = '<div class="tile"></div>';
 	//tu docelowo moze powstać zmienna, determinująca długość tablicy poniżej, wartość zmiennej podawana jest przez usera przed startem
@@ -45,6 +41,11 @@ var tile = new TileConstructor();
 
 
 $(document).ready(function() {
+	
+	var counter = 0,
+	choicesResult = [];
+
+
 	$('#startgame').on('click', function(event){
 		tile.drawTile();
 		tile.addTileData();
@@ -56,28 +57,62 @@ $(document).ready(function() {
 	$(document).on('click', '.tile', function() {
 
 		var pValue = $("p", this).text();
-		
 		counter += 1;
 		
 		$("p", this).css("visibility", "visible");
 		choicesResult.push(pValue);
-
 		if (counter == 2) {
 			checkChoicesResult();
 		}
+
 		
 	});
+
 
 	function checkChoicesResult() {
 		
 
-		if (choicesResult[0] == choicesResult[1]) {
-			console.log("piknie");
-		}
+			if (choicesResult[0] == choicesResult[1]) {
+				resetMoveDataOk();
+			}
 
-		else {
-			console.log("dupa");
-		}
+			else {
+				resetMoveDataWrong();
+			}
+
 	}
+
+	function resetMoveDataWrong() {
+
+			var choicesResult0 = choicesResult[0],
+				choicesResult1 = choicesResult[1];
+
+			return choicesResult = [], counter = 0, setTimeout(function() {$("p").find(choicesResult0 && choicesResult1).css("visibility", "hidden");}, 2000);
+	}
+
+	function resetMoveDataOk() {
+				return choicesResult = [], counter = 0;
+	}
+
+	// function checkChoicesResult() {
+		
+
+	// 	if (choicesResult[0] == choicesResult[1]) {
+	// 		resetMoveDataOk();
+	// 	}
+
+	// 	else {
+	// 		resetMoveDataWrong();
+	// 	}
+
+	// 	function resetMoveDataWrong() {
+	// 	return choicesResult = [], counter = 0, setTimeout(function() {$("p").css("visibility", "hidden");}, 2000);
+	// 	}
+
+	// 	function resetMoveDataOk() {
+	// 		return choicesResult = [], counter = 0;
+	// 	}
+
+	// }
 
 });
