@@ -94,25 +94,5 @@ $(document).ready(function() {
 				return choicesResult = [], counter = 0;
 	}
 
-	// function checkChoicesResult() {
-		
-
-	// 	if (choicesResult[0] == choicesResult[1]) {
-	// 		resetMoveDataOk();
-	// 	}
-
-	// 	else {
-	// 		resetMoveDataWrong();
-	// 	}
-
-	// 	function resetMoveDataWrong() {
-	// 	return choicesResult = [], counter = 0, setTimeout(function() {$("p").css("visibility", "hidden");}, 2000);
-	// 	}
-
-	// 	function resetMoveDataOk() {
-	// 		return choicesResult = [], counter = 0;
-	// 	}
-
-	// }
 
 });
