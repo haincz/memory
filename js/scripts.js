@@ -6,7 +6,6 @@ function TileConstructor () {
 }
 
 TileConstructor.prototype.drawTile = function() {
-	
 	for (var i = 0; i < 16; i++) {
 		$('.row-starter').append(this.tile);
 	}
@@ -37,62 +36,84 @@ TileConstructor.prototype.addTileData = function() {
 
 var tile = new TileConstructor();
 
-
-
-
 $(document).ready(function() {
-	
-	var counter = 0,
-	choicesResult = [];
+	var counter,
+		choicesResult,
+		successQty;
 
+	$(document).on('click', '.tile', init);
 
-	$('#startgame').on('click', function(event){
-		tile.drawTile();
-		tile.addTileData();
-		//startGame();
+	$('#startgame').on('click', function(event) {
+		newGame();
 	});
 
+	function newGame() {
+		counter = successQty = 0;
+		choicesResult = [];
 
-	//Granie
-	$(document).on('click', '.tile', function() {
+		$('#board').empty();
+		tile.drawTile();
+		tile.addTileData();
+	}
 
-		var pValue = $("p", this).text();
+	function init() {
+		var pValue = $("p", this);
 		counter += 1;
 		
 		$("p", this).css("visibility", "visible");
 		choicesResult.push(pValue);
 		if (counter == 2) {
+			$(document).off('click', '.tile', init);
+
 			checkChoicesResult();
 		}
-
-		
-	});
-
+	}
 
 	function checkChoicesResult() {
-		
-
-			if (choicesResult[0] == choicesResult[1]) {
-				resetMoveDataOk();
-			}
-
-			else {
-				resetMoveDataWrong();
-			}
-
+		if (choicesResult[0].text() == choicesResult[1].text()) {
+			resetMoveDataOk().then(function() {
+				$(document).on('click', '.tile', init);
+				choicesResult = [];
+			});
+		} else {
+			resetMoveDataWrong().then(function() {
+				$(document).on('click', '.tile', init);
+				choicesResult = [];
+			});
+		}
 	}
 
 	function resetMoveDataWrong() {
+		return new $.Deferred(function(defer) {
+			counter = 0;
 
-			var choicesResult0 = choicesResult[0],
-				choicesResult1 = choicesResult[1];
+			setTimeout(function() {
+				hide(choicesResult[0]);
+				hide(choicesResult[1]);
 
-			return choicesResult = [], counter = 0, setTimeout(function() {$("p").find(choicesResult0 && choicesResult1).css("visibility", "hidden");}, 2000);
+				defer.resolve();
+			}, 2000);
+		});
+	}
+
+	function show(element) {
+		element.css('visibility', 'visible');
+	}
+
+	function hide(element) {
+		element.css('visibility', 'hidden');
 	}
 
 	function resetMoveDataOk() {
-				return choicesResult = [], counter = 0;
+		return new $.Deferred(function(defer) {
+			counter = 0;
+			successQty += 1;
+
+			if (successQty === 8) {
+				alert('Nice');
+			}
+
+			defer.resolve();
+		});
 	}
-
-
 });
