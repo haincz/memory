@@ -1,6 +1,5 @@
 function TileConstructor () {
 	this.tile = '<div class="tile"></div>';
-	//tu docelowo moze powstać zmienna, determinująca długość tablicy poniżej, wartość zmiennej podawana jest przez usera przed startem
 	this.tileData = [1,2,3,4,5,6,7,8,8,7,6,5,4,3,2,1];
 
 }
